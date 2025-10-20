@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="register-container">
+    <div class="role-selector">
+      <ion-segment [(ngModel)]="selectedRole" (ionChange)="onRoleChange(selectedRole)">
+        <ion-segment-button value="user">
+          <ion-icon name="person"></ion-icon>
+          <ion-label>Adoptant</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="refuge">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Refuge</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <ion-card>
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-input
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              [clearInput]="true"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+              type="password"
+              formControlName="password"
+              placeholder="Mot de passe (min. 6 caractères)"
+              [clearInput]="true"
+            ></ion-input>
+          </ion-item>
+
+          <div *ngIf="selectedRole === 'user'">
+            <ion-item lines="none">
+              <ion-input
+                formControlName="displayName"
+                placeholder="Nom complet"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+          </div>
+
+          <div *ngIf="selectedRole === 'refuge'">
+            <ion-item lines="none">
+              <ion-input
+                formControlName="refugeName"
+                placeholder="Nom du refuge"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-input
+                formControlName="refugeAddress"
+                placeholder="Adresse (optionnel)"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-input
+                type="tel"
+                formControlName="refugePhone"
+                placeholder="Téléphone (optionnel)"
+                [clearInput]="true"
+              ></ion-input>
+            </ion-item>
+          </div>
+
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="registerForm.invalid"
+            class="register-button"
+          >
+            Créer mon compte
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+    <div class="login-section">
+      <p>Vous avez déjà un compte ?</p>
+      <ion-button fill="clear" (click)="goToLogin()">
+        Se connecter
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

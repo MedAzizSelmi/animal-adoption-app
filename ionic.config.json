@@ -1,0 +1,7 @@
+{
+  "name": "animal-adoption-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

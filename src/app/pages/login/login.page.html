@@ -1,0 +1,49 @@
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <div class="logo-section">
+      <ion-icon name="paw" class="logo-icon"></ion-icon>
+      <h1>Animal Adoption</h1>
+      <p>Trouvez votre compagnon idéal</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <ion-card>
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-input
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              [clearInput]="true"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+              type="password"
+              formControlName="password"
+              placeholder="Mot de passe"
+              [clearInput]="true"
+            ></ion-input>
+          </ion-item>
+
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="loginForm.invalid"
+            class="login-button"
+          >
+            Se connecter
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+    <div class="register-section">
+      <p>Pas encore de compte ?</p>
+      <ion-button fill="clear" (click)="goToRegister()">
+        S'inscrire
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

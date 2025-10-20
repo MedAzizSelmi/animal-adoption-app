@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-container">
+    <div class="profile-header" *ngIf="userProfile$ | async as profile">
+      <div class="avatar">
+        <ion-icon [name]="profile.role === 'refuge' ? 'home' : 'person'"></ion-icon>
+      </div>
+      <h1>{{ profile.refugeName || profile.displayName || 'Utilisateur' }}</h1>
+      <p class="email">{{ profile.email }}</p>
+      <ion-chip [color]="profile.role === 'refuge' ? 'primary' : 'secondary'">
+        <ion-label>{{ profile.role === 'refuge' ? 'Refuge' : 'Adoptant' }}</ion-label>
+      </ion-chip>
+    </div>
+
+    <div class="profile-info" *ngIf="userProfile$ | async as profile">
+      <ion-card *ngIf="profile.role === 'refuge'">
+        <ion-card-header>
+          <ion-card-title>Informations du refuge</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="info-item" *ngIf="profile.refugeAddress">
+            <ion-icon name="location"></ion-icon>
+            <span>{{ profile.refugeAddress }}</span>
+          </div>
+          <div class="info-item" *ngIf="profile.refugePhone">
+            <ion-icon name="call"></ion-icon>
+            <span>{{ profile.refugePhone }}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngIf="profile.role === 'user'">
+        <ion-card-header>
+          <ion-card-title>Mes Favoris</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div *ngIf="(favoriteAnimals$ | async)?.length === 0" class="no-favorites">
+            <ion-icon name="heart-outline"></ion-icon>
+            <p>Aucun favori pour le moment</p>
+          </div>
+
+          <ion-list *ngIf="(favoriteAnimals$ | async)?.length! > 0">
+            <ion-item
+              *ngFor="let animal of favoriteAnimals$ | async"
+              (click)="viewAnimal(animal.id!)"
+              button
+            >
+              <ion-thumbnail slot="start">
+                <img [src]="animal.imageUrl" [alt]="animal.name" />
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{ animal.name }}</h2>
+                <p>{{ animal.type }} - {{ getAnimalAge(animal.age) }}</p>
+              </ion-label>
+              <ion-button
+                fill="clear"
+                slot="end"
+                (click)="removeFavorite(animal.id!); $event.stopPropagation()"
+              >
+                <ion-icon name="heart" color="danger"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="actions">
+      <ion-button expand="block" fill="outline" color="danger" (click)="logout()">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+        Déconnexion
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

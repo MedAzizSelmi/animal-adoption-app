@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/refuge"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajouter un animal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="animalForm" (ngSubmit)="onSubmit()">
+    <div class="image-section">
+      <div class="image-preview" (click)="selectImageSource()">
+        <img *ngIf="selectedImage" [src]="selectedImage" alt="Animal" />
+        <div *ngIf="!selectedImage" class="placeholder">
+          <ion-icon name="camera"></ion-icon>
+          <p>Ajouter une photo</p>
+        </div>
+      </div>
+    </div>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label position="stacked">Nom *</ion-label>
+          <ion-input
+            formControlName="name"
+            placeholder="Ex: Max"
+            [clearInput]="true"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Type *</ion-label>
+          <ion-select formControlName="type" placeholder="Sélectionner">
+            <ion-select-option value="Chien">Chien</ion-select-option>
+            <ion-select-option value="Chat">Chat</ion-select-option>
+            <ion-select-option value="Lapin">Lapin</ion-select-option>
+            <ion-select-option value="Oiseau">Oiseau</ion-select-option>
+            <ion-select-option value="Autre">Autre</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Race *</ion-label>
+          <ion-input
+            formControlName="breed"
+            placeholder="Ex: Labrador"
+            [clearInput]="true"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Âge (années) *</ion-label>
+          <ion-input
+            type="number"
+            formControlName="age"
+            placeholder="Ex: 2"
+            min="0"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Description * (min. 20 caractères)</ion-label>
+          <ion-textarea
+            formControlName="description"
+            placeholder="Décrivez l'animal, son caractère, ses besoins..."
+            rows="5"
+            [autoGrow]="true"
+          ></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="animalForm.invalid || !selectedImage"
+      class="submit-button"
+    >
+      <ion-icon name="checkmark" slot="start"></ion-icon>
+      Ajouter l'animal
+    </ion-button>
+  </form>
+</ion-content>

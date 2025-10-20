@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Détails</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFavorite()">
+        <ion-icon
+          slot="icon-only"
+          [name]="isFavorite ? 'heart' : 'heart-outline'"
+          [color]="isFavorite ? 'danger' : 'medium'"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="animal$ | async as animal" class="animal-details">
+    <div class="hero-image">
+      <img [src]="animal.imageUrl" [alt]="animal.name" />
+    </div>
+
+    <div class="details-content">
+      <h1>{{ animal.name }}</h1>
+
+      <div class="info-chips">
+        <ion-chip color="primary">
+          <ion-icon name="paw"></ion-icon>
+          <ion-label>{{ animal.type }}</ion-label>
+        </ion-chip>
+        <ion-chip color="secondary">
+          <ion-icon name="ribbon"></ion-icon>
+          <ion-label>{{ animal.breed }}</ion-label>
+        </ion-chip>
+        <ion-chip color="tertiary">
+          <ion-icon name="time"></ion-icon>
+          <ion-label>{{ getAnimalAge(animal.age) }}</ion-label>
+        </ion-chip>
+      </div>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>À propos</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ animal.description }}</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Refuge</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="refuge-details">
+            <div class="refuge-item">
+              <ion-icon name="home"></ion-icon>
+              <span>{{ animal.refugeName }}</span>
+            </div>
+            <div class="refuge-item" *ngIf="animal.refugeAddress">
+              <ion-icon name="location"></ion-icon>
+              <span>{{ animal.refugeAddress }}</span>
+            </div>
+            <div class="refuge-item" *ngIf="animal.refugePhone">
+              <ion-icon name="call"></ion-icon>
+              <span>{{ animal.refugePhone }}</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" (click)="openAdoptionModal()" class="adopt-button">
+      <ion-icon name="heart" slot="start"></ion-icon>
+      Demander l'adoption
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Animaux à adopter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="animals-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col
+          size="12"
+          sizeMd="6"
+          sizeLg="4"
+          *ngFor="let animal of animals$ | async"
+        >
+          <ion-card class="animal-card" (click)="viewAnimal(animal.id!)">
+            <div class="image-container">
+              <img [src]="animal.imageUrl" [alt]="animal.name" />
+              <ion-button
+                class="favorite-button"
+                fill="clear"
+                (click)="toggleFavorite($event, animal.id!)"
+              >
+                <ion-icon
+                  [name]="isFavorite(animal.id!) ? 'heart' : 'heart-outline'"
+                  [class.favorite-active]="isFavorite(animal.id!)"
+                ></ion-icon>
+              </ion-button>
+            </div>
+
+            <ion-card-content>
+              <h2>{{ animal.name }}</h2>
+              <div class="animal-info">
+                <ion-chip color="primary">
+                  <ion-icon name="paw"></ion-icon>
+                  <ion-label>{{ animal.type }}</ion-label>
+                </ion-chip>
+                <ion-chip color="secondary">
+                  <ion-icon name="time"></ion-icon>
+                  <ion-label>{{ getAnimalAge(animal.age) }}</ion-label>
+                </ion-chip>
+              </div>
+              <p class="description">{{ animal.description }}</p>
+              <div class="refuge-info">
+                <ion-icon name="home"></ion-icon>
+                <span>{{ animal.refugeName }}</span>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="empty-state" *ngIf="(animals$ | async)?.length === 0">
+      <ion-icon name="paw"></ion-icon>
+      <h3>Aucun animal disponible</h3>
+      <p>Revenez plus tard pour découvrir de nouveaux compagnons!</p>
+    </div>
+  </div>
+</ion-content>

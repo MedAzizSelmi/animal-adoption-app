@@ -1,0 +1,124 @@
+.profile-container {
+  padding: 1rem;
+}
+
+.profile-header {
+  text-align: center;
+  padding: 2rem 0;
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+
+    ion-icon {
+      font-size: 48px;
+      color: white;
+    }
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .email {
+    color: var(--ion-color-medium);
+    font-size: 14px;
+    margin: 0 0 1rem 0;
+  }
+
+  ion-chip {
+    font-weight: 600;
+  }
+}
+
+.profile-info {
+  margin-bottom: 2rem;
+
+  ion-card {
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    ion-card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ion-color-dark);
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      color: var(--ion-color-dark);
+
+      ion-icon {
+        font-size: 20px;
+        color: var(--ion-color-primary);
+      }
+    }
+
+    .no-favorites {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--ion-color-medium);
+
+      ion-icon {
+        font-size: 48px;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    ion-list {
+      background: transparent;
+
+      ion-item {
+        --background: transparent;
+        --padding-start: 0;
+
+        ion-thumbnail {
+          width: 60px;
+          height: 60px;
+          border-radius: 8px;
+
+          img {
+            border-radius: 8px;
+            object-fit: cover;
+          }
+        }
+
+        ion-label {
+          h2 {
+            font-weight: 600;
+            color: var(--ion-color-dark);
+          }
+
+          p {
+            color: var(--ion-color-medium);
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.actions {
+  ion-button {
+    --border-radius: 12px;
+    height: 50px;
+    font-weight: 600;
+  }
+}

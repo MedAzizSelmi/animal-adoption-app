@@ -1,0 +1,121 @@
+.animals-container {
+  padding: 1rem;
+}
+
+.animal-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .favorite-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+    ion-icon {
+      font-size: 24px;
+      color: var(--ion-color-medium);
+    }
+
+    .favorite-active {
+      color: var(--ion-color-danger);
+    }
+  }
+}
+
+ion-card-content {
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--ion-color-dark);
+  }
+
+  .animal-info {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+
+    ion-chip {
+      font-size: 12px;
+      height: 28px;
+    }
+  }
+
+  .description {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    margin: 0 0 1rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+  }
+
+  .refuge-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ion-color-primary);
+    font-size: 14px;
+    font-weight: 500;
+
+    ion-icon {
+      font-size: 18px;
+    }
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  ion-icon {
+    font-size: 80px;
+    color: var(--ion-color-medium);
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
