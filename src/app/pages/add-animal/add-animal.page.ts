@@ -6,6 +6,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { LoadingController, AlertController, ActionSheetController } from '@ionic/angular';
 import { AnimalService } from '../../services/animal.service';
 import { AuthService, UserProfile } from '../../services/auth.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-add-animal',
@@ -37,10 +38,15 @@ export class AddAnimalPage implements OnInit {
       age: [0, [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required, Validators.minLength(20)]],
     });
-
-    const user = await this.authService.user$.pipe().toPromise();
-    if (user) {
-      this.userProfile = await this.authService.getUserProfile(user.uid);
+    try {
+      const user = await firstValueFrom(this.authService.user$);
+      if (user) {
+        this.userProfile = await this.authService.getUserProfile(user.uid);
+      } else {
+        console.log('No user found');
+      }
+    } catch (error) {
+      console.error('Error in ngOnInit:', error);
     }
   }
 
@@ -129,7 +135,7 @@ export class AddAnimalPage implements OnInit {
     await loading.present();
 
     try {
-      const user = await this.authService.user$.pipe().toPromise();
+      const user = await firstValueFrom(this.authService.user$);;
       if (!user) throw new Error('User not found');
 
       const imageUrl = await this.animalService.uploadImage(
