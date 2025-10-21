@@ -25,7 +25,7 @@
   h1 {
     font-size: 24px;
     font-weight: 600;
-    color: var(--ion-color-dark);
+    color: white;
     margin: 0 0 0.25rem 0;
   }
 
@@ -50,7 +50,7 @@
     ion-card-title {
       font-size: 18px;
       font-weight: 600;
-      color: var(--ion-color-dark);
+      color: white;
     }
 
     .info-item {
@@ -58,7 +58,7 @@
       align-items: center;
       gap: 0.75rem;
       padding: 0.5rem 0;
-      color: var(--ion-color-dark);
+      color: white;
 
       ion-icon {
         font-size: 20px;
@@ -102,7 +102,7 @@
         ion-label {
           h2 {
             font-weight: 600;
-            color: var(--ion-color-dark);
+            color: white;
           }
 
           p {

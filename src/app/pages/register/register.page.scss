@@ -15,15 +15,18 @@
   ion-segment-button {
     --indicator-color: var(--ion-color-primary);
     --color-checked: white;
+    --color: #000000;
     min-height: 60px;
 
     ion-icon {
       font-size: 24px;
       margin-bottom: 4px;
+      color: #000000;
     }
 
     ion-label {
       font-weight: 600;
+      color: #000000;
     }
   }
 }

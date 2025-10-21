@@ -48,7 +48,7 @@ export class RefugePage implements OnInit {
           role: 'destructive',
           handler: async () => {
             try {
-              await this.animalService.deleteAnimal(animal.id!, animal.imageUrl);
+              await this.animalService.deleteAnimal(animal.id!);
               const successAlert = await this.alertCtrl.create({
                 header: 'Succès',
                 message: 'Animal supprimé avec succès.',

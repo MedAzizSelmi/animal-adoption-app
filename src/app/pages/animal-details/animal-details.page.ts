@@ -6,7 +6,7 @@ import {
   LoadingController,
   ModalController,
 } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { Animal, AnimalService } from '../../services/animal.service';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
@@ -90,8 +90,8 @@ export class AnimalDetailsPage implements OnInit {
     await loading.present();
 
     try {
-      const user = await this.authService.user$.pipe().toPromise();
-      const animal = await this.animal$.pipe().toPromise();
+      const user = await firstValueFrom(this.authService.user$);
+      const animal = await firstValueFrom(this.animal$);
 
       if (!user || !animal) {
         throw new Error('User or animal not found');
@@ -107,6 +107,10 @@ export class AnimalDetailsPage implements OnInit {
       });
 
       await this.notificationService.sendAdoptionRequestNotification(animal.name);
+      await this.notificationService.sendNewAdoptionRequestNotification(
+        animal.name,
+        user.email!
+      );
       await loading.dismiss();
 
       const alert = await this.alertCtrl.create({
